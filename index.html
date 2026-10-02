@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карточка товара</title>
+    <!-- Подключаем скрипт Telegram Web App -->
+    <script src="https://telegram.org"></script>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--tg-theme-bg-color, #ffffff);
+            color: var(--tg-theme-text-color, #000000);
+            margin: 0;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+        }
+        .card {
+            background-color: var(--tg-theme-secondary-bg-color, #f4f4f5);
+            border-radius: 12px;
+            padding: 16px;
+            max-width: 300px;
+            text-align: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+        .product-img {
+            width: 100%;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        .title {
+            font-size: 20px;
+            margin: 12px 0 6px 0;
+            font-weight: bold;
+        }
+        .price {
+            font-size: 18px;
+            color: var(--tg-theme-button-color, #2481cc);
+            font-weight: bold;
+            margin-bottom: 16px;
+        }
+        .btn {
+            background-color: var(--tg-theme-button-color, #2481cc);
+            color: var(--tg-theme-button-text-color, #ffffff);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <!-- Вставьте сюда любую картинку товара -->
+        <img class="product-img" src="https://unsplash.com" alt="Кроссовки">
+        <div class="title">Спортивные кроссовки</div>
+        <div class="price">5 990 ₽</div>
+        <button class="btn" id="buy-btn">Купить</button>
+    </div>
+
+    <script>
+        // Инициализируем Telegram Web App
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Расширяем приложение на весь экран
+
+        document.getElementById('buy-btn').addEventListener('click', () => {
+            // Отправляем данные о покупке обратно в чат с ботом
+            const data = {
+                product: "Спортивные кроссовки",
+                price: "5 990 ₽"
+            };
+            tg.sendData(JSON.stringify(data)); 
+            tg.close(); // Закрываем мини-приложение после клика
+        });
+    </script>
+</body>
+</html>
